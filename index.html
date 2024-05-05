@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecommerce website Feedback Form</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  body {
+    background-color: #f8f9fa;
+  }
+
+  .feedback-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .feedback-box h1 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .feedback-form {
+    background-color: #f3f4f6;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .feedback-form label {
+    font-weight: bold;
+    color: #555;
+  }
+
+  .feedback-form button {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .feedback-form button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="feedback-box">
+      <h1>Feedback Form</h1>
+      <div class="feedback-form" id="feedbackForm">
+        <form>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="abc@gmail.com" required>
+          </div>
+          <div class="form-group">
+            <label for="rating">Overall Rating:</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="rating1" name="rating" value="1" required>
+              <label class="form-check-label" for="rating1">1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="rating2" name="rating" value="2">
+              <label class="form-check-label" for="rating2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="rating3" name="rating" value="3">
+              <label class="form-check-label" for="rating3">3</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="rating4" name="rating" value="4">
+              <label class="form-check-label" for="rating4">4</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="rating5" name="rating" value="5">
+              <label class="form-check-label" for="rating5">5</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="experience">Shopping Experience:</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="easy" name="experience" value="Easy">
+              <label class="form-check-label" for="easy">Easy</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="fast" name="experience" value="Fast">
+              <label class="form-check-label" for="fast">Fast</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="secure" name="experience" value="Secure">
+              <label class="form-check-label" for="secure">Secure</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="reason">Reason for visit:</label>
+            <select id="reason" name="reason" class="form-control" required>
+              <option value="">Select Reason</option>
+              <option value="Browsing">Browsing</option>
+              <option value="Product Purchase">Product Purchase</option>
+              <option value="Customer Service">Customer Service</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="comments">Additional Comments:</label>
+            <textarea id="comments" name="comments" class="form-control" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Submit Feedback</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent form submission
+
+      // Get form values
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var rating = document.querySelector('input[name="rating"]:checked').value;
+      var experience = [];
+      var checkboxes = document.querySelectorAll('input[name="experience"]:checked');
+      checkboxes.forEach(function(checkbox) {
+        experience.push(checkbox.value);
+      });
+      var reason = document.getElementById("reason").value;
+      var comments = document.getElementById("comments").value;
+
+      // Create feedback object
+      var feedback = {
+        name: name,
+        email: email,
+        rating: rating,
+        experience: experience,
+        reason: reason,
+        comments: comments
+      };
+
+      // Store feedback data in local storage
+      localStorage.setItem("Feedback", JSON.stringify(feedback));
+
+      // Redirect to confirmation page
+      window.location.href = "display.html";
+    });
+  </script>
+</body>
+</html>
+

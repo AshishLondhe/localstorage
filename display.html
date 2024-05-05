@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback Data</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  body {
+    background-color: #f8f9fa;
+  }
+  
+  .feedback-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .feedback-box h2 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .feedback-data {
+    padding: 10px 0;
+  }
+
+  .feedback-data p {
+    margin-bottom: 5px;
+  }
+
+  .feedback-data p strong {
+    font-weight: bold;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="feedback-box">
+      <h2>Feedback Data</h2>
+      <div class="feedback-data" id="feedbackData"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Retrieve feedback data from local storage
+      var latestFeedback = JSON.parse(localStorage.getItem("Feedback"));
+
+      // Display feedback data
+      var feedbackDataDiv = document.getElementById("feedbackData");
+
+      if (!latestFeedback) {
+        feedbackDataDiv.innerHTML = "<p class='text-center'>No feedback submitted yet.</p>";
+      } else {
+        var html = "<p><strong>Name:</strong> " + latestFeedback.name + "</p>";
+        html += "<p><strong>Email:</strong> " + latestFeedback.email + "</p>";
+        html += "<p><strong>Overall Rating:</strong> " + latestFeedback.rating + "</p>";
+        html += "<p><strong>Shopping Experience:</strong> " + latestFeedback.experience.join(", ") + "</p>";
+        html += "<p><strong>Reason for Visit:</strong> " + latestFeedback.reason + "</p>";
+        html += "<p><strong>Additional Comments:</strong> " + latestFeedback.comments + "</p>";
+        feedbackDataDiv.innerHTML = html;
+      }
+
+      // Clear the latest feedback data from local storage
+      //localStorage.removeItem("Feedback");
+    });
+  </script>
+</body>
+</html>
